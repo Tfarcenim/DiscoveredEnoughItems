@@ -2,7 +2,7 @@ package tfar.dei;
 
 import net.fabricmc.api.ModInitializer;
 
-public class ExampleMod implements ModInitializer {
+public class DEIFabric implements ModInitializer {
     
     @Override
     public void onInitialize() {
@@ -10,9 +10,7 @@ public class ExampleMod implements ModInitializer {
         // This method is invoked by the Fabric mod loader when it is ready
         // to load your mod. You can access Fabric and Common code in this
         // project.
-
         // Use Fabric to bootstrap the Common mod.
-        DiscoveredEnoughItems.LOG.info("Hello Fabric world!");
         DiscoveredEnoughItems.init();
     }
 }

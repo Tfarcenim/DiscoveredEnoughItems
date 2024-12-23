@@ -17,11 +17,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Mixin(targets = {"net/minecraft/server/level/ServerPlayer$2"})
-public class ServerPlayerMixinForge {//BROKEN, DON'T USE
-   // @Shadow(remap = false)
-    @Final
-    ServerPlayer this$0;
+public class ServerPlayerMixinFabric {//BROKEN, DON'T USE
 
+
+    @Shadow @Final
+    ServerPlayer this$0;
     //don't send unneeded packets
     private final Set<Item> cache = new HashSet<>();
 

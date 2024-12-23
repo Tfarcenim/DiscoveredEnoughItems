@@ -11,13 +11,15 @@
         "homepage": "https://fabricmc.net/",
         "sources": "https://github.com/FabricMC/fabric-example-mod"
     },
+    "accessWidener": "dei.accesswidener",
     "license": "${license}",
     "icon": "assets/modid/${mod_id}.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-          "tfar.dei.ExampleMod"
-        ]
+          "tfar.dei.DEIFabric"
+        ],
+        "client": ["tfar.dei.client.DEIClientFabric"]
     },
     "mixins": [
         "${mod_id}.mixins.json",

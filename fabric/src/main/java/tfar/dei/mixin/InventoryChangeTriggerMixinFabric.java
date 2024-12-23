@@ -18,7 +18,7 @@ import java.util.Set;
 import java.util.WeakHashMap;
 
 @Mixin(InventoryChangeTrigger.class)
-public class InventoryChangeTriggerMixinForge {//thank forge for using outdated mixin
+public class InventoryChangeTriggerMixinFabric {
 
     @Unique
     private final WeakHashMap<ServerPlayer,Set<Item>> cache = new WeakHashMap<>();
