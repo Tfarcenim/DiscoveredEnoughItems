@@ -79,6 +79,12 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     compileOnly project(":common")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+
+    if (project.use_rei.toBoolean()) {
+        implementation fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:$rei_version")
+        implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:$cloth_config_version")
+        implementation fg.deobf("dev.architectury:architectury-forge:$architectury_version")
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {

@@ -7,7 +7,7 @@
     "mixins": [
     ],
     "client": [
-        "MixinTitleScreen"
+      "tfar.dei.mixin.MixinTitleScreen"
     ],
     "server": [
     ],
