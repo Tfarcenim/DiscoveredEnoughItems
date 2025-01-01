@@ -9,7 +9,9 @@ import com.google.gson.stream.JsonWriter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.client.server.IntegratedServer;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -33,7 +35,7 @@ import java.util.Set;
 
 public class DiscoveredItems {
 
-    public static final ResourceLocation ID = DiscoveredEnoughItems.id("hidden");
+    public static final ModelResourceLocation ID = new ModelResourceLocation(DiscoveredEnoughItems.id("hidden"),"standalone");
     private static final Set<Item> discovered = new HashSet<>();
     private static final Map<Item, Component> tooltips = new HashMap<>();
     private static String worldName;
@@ -80,6 +82,7 @@ public class DiscoveredItems {
     static Gson gson = new Gson();
 
     public static void loadFromDisk() {
+        RegistryAccess access = Minecraft.getInstance().level.registryAccess();
         clear();
 
         new File("dei/").mkdirs();//make sure the folder exists
@@ -103,7 +106,7 @@ public class DiscoveredItems {
                 JsonArray json = gson.fromJson(jsonReader, JsonArray.class);
 
                 for (JsonElement element : json) {
-                    discovered.add(BuiltInRegistries.ITEM.get(new ResourceLocation(element.getAsString())));
+                    discovered.add(BuiltInRegistries.ITEM.get(ResourceLocation.parse(element.getAsString())));
                 }
 
             } catch (Exception e) {
@@ -122,8 +125,8 @@ public class DiscoveredItems {
                 JsonObject json = gson.fromJson(jsonReader, JsonObject.class);
 
                 for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
-                    Item item = BuiltInRegistries.ITEM.get(new ResourceLocation(entry.getKey()));
-                    Component component = Component.Serializer.fromJson(entry.getValue().getAsString());
+                    Item item = BuiltInRegistries.ITEM.get(ResourceLocation.parse(entry.getKey()));
+                    Component component = Component.Serializer.fromJson(entry.getValue().getAsString(),access);
                     tooltips.put(item, component);
                 }
 

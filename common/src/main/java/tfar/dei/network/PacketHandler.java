@@ -10,7 +10,7 @@ import java.util.Locale;
 public class PacketHandler {
 
     public static void registerPackets() {
-        Services.PLATFORM.registerClientPacket(S2CItemStackPacket.class, S2CItemStackPacket::new);
+        Services.PLATFORM.registerClientPlayPacket(S2CItemStackPacket.TYPE, S2CItemStackPacket.STREAM_CODEC);
 
     }
 

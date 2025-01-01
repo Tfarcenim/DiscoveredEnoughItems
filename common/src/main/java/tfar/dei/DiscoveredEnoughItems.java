@@ -25,10 +25,9 @@ public class DiscoveredEnoughItems {
         // your own abstraction layer. You can learn more about this in our provided services class. In this example
         // we have an interface in the common code and use a loader specific implementation to delegate our call to
         // the platform specific approach.
-        PacketHandler.registerPackets();
     }
 
     public static ResourceLocation id(String path) {
-        return new ResourceLocation(MOD_ID,path);
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID,path);
     }
 }

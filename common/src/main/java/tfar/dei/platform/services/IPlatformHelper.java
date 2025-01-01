@@ -1,6 +1,9 @@
 package tfar.dei.platform.services;
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import tfar.dei.network.client.S2CModPacket;
 import tfar.dei.network.server.C2SModPacket;
@@ -41,9 +44,10 @@ public interface IPlatformHelper {
         return isDevelopmentEnvironment() ? "development" : "production";
     }
 
-    <MSG extends S2CModPacket> void registerClientPacket(Class<MSG> packetLocation, Function<FriendlyByteBuf,MSG> reader);
-    <MSG extends C2SModPacket> void registerServerPacket(Class<MSG> packetLocation, Function<FriendlyByteBuf,MSG> reader);
-    void sendToClient(S2CModPacket msg, ServerPlayer player);
-    void sendToServer(C2SModPacket msg);
+    <MSG extends S2CModPacket<RegistryFriendlyByteBuf>> void registerClientPlayPacket(CustomPacketPayload.Type<MSG> type, StreamCodec<RegistryFriendlyByteBuf,MSG> streamCodec);
+    <MSG extends C2SModPacket<RegistryFriendlyByteBuf>> void registerServerPlayPacket(CustomPacketPayload.Type<MSG> type, StreamCodec<RegistryFriendlyByteBuf,MSG> streamCodec);
+
+    void sendToClient(S2CModPacket<?> msg, ServerPlayer player);
+    void sendToServer(C2SModPacket<?> msg);
 
 }
