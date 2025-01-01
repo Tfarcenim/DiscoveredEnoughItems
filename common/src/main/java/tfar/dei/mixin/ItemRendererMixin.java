@@ -19,23 +19,4 @@ public class ItemRendererMixin {
         }
         return i;
     }
-
-    @ModifyVariable(method = "render", at = @At("HEAD"), ordinal = 0, argsOnly = true)//light,overlay
-    private int blackout(int i, ItemStack stack) {
-        if (!DiscoveredItems.discovered(stack)) {
-            return DiscoveredItems.packed();
-        }
-        return i;
-    }
-
-    @ModifyVariable(method = "render", at = @At("HEAD"), ordinal = 1, argsOnly = true)//light,overlay
-    private int blackout1(int i, ItemStack stack) {
-        if (!DiscoveredItems.discovered(stack)) {
-            return DiscoveredItems.overlay();
-        }
-        return i;
-    }
-
-
-
 }

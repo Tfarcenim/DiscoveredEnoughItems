@@ -11,7 +11,7 @@ import tfar.dei.client.DEIClient;
 @Mixin(Minecraft.class)
 public class MinecraftMixinFabric {
 
-    @Inject(method = "clearLevel(Lnet/minecraft/client/gui/screens/Screen;)V",
+    @Inject(method = "clearClientLevel",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/client/GameNarrator;clear()V"))
     private void handleLogin(Screen screen, CallbackInfo ci) {
         DEIClient.leaveWorld();

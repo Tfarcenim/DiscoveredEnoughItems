@@ -1,6 +1,5 @@
 package tfar.dei.client;
 
-import fuzs.forgeconfigapiport.fabric.api.forge.v4.ForgeConfigRegistry;
 import fuzs.forgeconfigapiport.fabric.api.neoforge.v4.NeoForgeConfigRegistry;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.item.v1.ItemTooltipCallback;
@@ -9,8 +8,8 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -24,7 +23,7 @@ import java.util.Map;
 public class DEIClientFabric implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(DiscoveredItems.ID.id()));
+        ModelLoadingPlugin.register(pluginContext -> pluginContext.addModels(DiscoveredItems.FABRIC_ID.id()));
         ItemTooltipCallback.EVENT.register(this::tooltip);
         NeoForgeConfigRegistry.INSTANCE.register(DiscoveredEnoughItems.MOD_ID, ModConfig.Type.CLIENT, DEIConfig.CLIENT_SPEC);
     }
@@ -42,8 +41,8 @@ public class DEIClientFabric implements ClientModInitializer {
 
     public static void afterBake() {
         ItemRenderer irenderer = Minecraft.getInstance().getItemRenderer();
-        Map<ResourceLocation, BakedModel> registry = irenderer.getItemModelShaper().getModelManager().bakedRegistry;
-        DiscoveredItems.HIDDEN = registry.get(DiscoveredItems.ID);
+        Map<ModelResourceLocation, BakedModel> registry = irenderer.getItemModelShaper().getModelManager().bakedRegistry;
+        DiscoveredItems.HIDDEN = registry.get(DiscoveredItems.FABRIC_ID);
         if (DiscoveredItems.HIDDEN == null) {
             throw new NullPointerException();
         }

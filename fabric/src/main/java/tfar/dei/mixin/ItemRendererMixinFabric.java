@@ -27,7 +27,7 @@ public class ItemRendererMixinFabric {
     }
 
     @ModifyArg(method = "renderQuadList",
-            at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/VertexConsumer;putBulkData(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;FFFII)V"),index = 2)
+            at = @At(value = "INVOKE", target = NAME),index = 2)
     private float forceColor0(float o) {
         if (!DiscoveredItems.discovered(local.get())) {
             return 0;
@@ -35,8 +35,10 @@ public class ItemRendererMixinFabric {
         return o;
     }
 
+    private static final String NAME = "Lcom/mojang/blaze3d/vertex/VertexConsumer;putBulkData(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;FFFFII)V";
+
     @ModifyArg(method = "renderQuadList",
-            at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/VertexConsumer;putBulkData(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;FFFII)V",remap = false),index = 3)
+            at = @At(value = "INVOKE", target = NAME,remap = false),index = 3)
     private float forceColor1(float o) {
         if (!DiscoveredItems.discovered(local.get())) {
             return 0;
@@ -45,7 +47,7 @@ public class ItemRendererMixinFabric {
     }
 
     @ModifyArg(method = "renderQuadList",
-            at = @At(value = "INVOKE", target = "Lcom/mojang/blaze3d/vertex/VertexConsumer;putBulkData(Lcom/mojang/blaze3d/vertex/PoseStack$Pose;Lnet/minecraft/client/renderer/block/model/BakedQuad;FFFII)V",remap = false),index = 4)
+            at = @At(value = "INVOKE", target = NAME,remap = false),index = 4)
     private float forceColor2(float o) {
         if (!DiscoveredItems.discovered(local.get())) {
             return 0;

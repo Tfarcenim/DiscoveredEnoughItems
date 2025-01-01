@@ -10,7 +10,7 @@ import tfar.dei.client.DEIClient;
 
 @Mixin(ClientPacketListener.class)
 public class ClientPacketListenerMixinFabric {
-    @Inject(method = "handleLogin", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Options;broadcastOptions()V"))
+    @Inject(method = "handleLogin", at = @At(value = "RETURN"))
     private void handleLogin(ClientboundLoginPacket packet, CallbackInfo ci) {
         DEIClient.joinWorld();
     }

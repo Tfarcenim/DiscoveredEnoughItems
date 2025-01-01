@@ -8,8 +8,9 @@
         "${mod_author}"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "homepage": "https://legacy.curseforge.com/minecraft/mc-mods/dei",
+        "sources": "${source}",
+        "issues": "${issues}"
     },
     "accessWidener": "dei.accesswidener",
     "license": "${license}",
@@ -28,8 +29,9 @@
     "depends": {
         "fabricloader": ">=0.14",
         "fabric": "*",
-        "minecraft": ">=1.20",
-        "java": ">=17"
+        "minecraft": ">=1.21",
+        "java": ">=21",
+        "forgeconfigapiport": ">=21"
     },
     "suggests": {
         "another-mod": "*"

@@ -1,12 +1,5 @@
 package tfar.dei.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.ItemRenderer;
-import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.resources.ResourceLocation;
-
-import java.util.Map;
-
 public class DEIClient {
     public static void joinWorld() {
         DiscoveredItems.setWorldName(DiscoveredItems.getWorldName());

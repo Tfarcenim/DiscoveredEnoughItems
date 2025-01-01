@@ -36,6 +36,7 @@ import java.util.Set;
 public class DiscoveredItems {
 
     public static final ModelResourceLocation ID = new ModelResourceLocation(DiscoveredEnoughItems.id("hidden"),"standalone");
+    public static final ModelResourceLocation FABRIC_ID = new ModelResourceLocation(DiscoveredEnoughItems.id("hidden"),"fabric_resource");
     private static final Set<Item> discovered = new HashSet<>();
     private static final Map<Item, Component> tooltips = new HashMap<>();
     private static String worldName;
@@ -69,14 +70,6 @@ public class DiscoveredItems {
     public static void addDiscovered(ItemStack stack) {
         boolean changed = discovered.add(stack.getItem());
         if (changed) saveToDisk();
-    }
-
-    public static int overlay() {
-        return 0xff000000;
-    }
-
-    public static int packed() {
-        return 0;
     }
 
     static Gson gson = new Gson();
@@ -135,6 +128,30 @@ public class DiscoveredItems {
             } finally {
                 IOUtils.closeQuietly(reader);
             }
+        }
+
+        if (!PRE_DISCOVERED.exists()) {
+            writeBlankJson(PRE_DISCOVERED,new JsonArray());
+        }
+
+        if (!TOOLTIPS.exists()) {
+            writeBlankJson(TOOLTIPS,new JsonObject());
+        }
+
+    }
+
+    static void writeBlankJson(File file,JsonElement element) {
+        JsonWriter writer = null;
+        try {
+            writer = gson.newJsonWriter(new FileWriter(file));
+            writer.setIndent("    ");
+            gson.toJson(element, writer);
+        } catch (Exception e) {
+            DiscoveredEnoughItems.LOG.error("Couldn't create file");
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        } finally {
+            IOUtils.closeQuietly(writer);
         }
     }
 
